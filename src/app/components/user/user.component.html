@@ -6,10 +6,10 @@
     <!-- <img src="assets/users/{{ selectedUser.avatar }}" />  -->
 
     <!-- Data Binding -->
-    <img [src]="imagePath" [alt]="name" />
+    <img [src]="imagePath" [alt]="user.name" />
 
     <!-- calling the signal value it has to be in the form of a function -->
 
-    <span>{{ name }}</span>
+    <span>{{ user.name }}</span>
   </button>
 </div>

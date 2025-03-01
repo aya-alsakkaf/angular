@@ -22,6 +22,7 @@ export class AppComponent {
     return this.users.find((user) => user.id == this.selectedUserId)
   }
   onSelectUser(id: string) {
+    // alert("test " + id)
     this.selectedUserId = id
   }
 }

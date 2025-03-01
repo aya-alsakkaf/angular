@@ -2,6 +2,19 @@ import { Component, Input, output, input, computed, signal, Signal, Output, Even
 // import { DUMMY_USERS } from '../../../data/users';
 
 // const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length)
+
+// type User = {
+//   name: string,
+//   id: string,
+//   avatar: string
+// }
+
+interface User {
+  name: string,
+  id: string,
+  avatar: string
+}
+
 @Component({
   selector: 'app-user',
   imports: [],
@@ -26,14 +39,17 @@ export class UserComponent {
   // ---------------------------------------------------------------------------
 
   // accepting component input (props)
-  @Input({ required: true }) avatar!: string;
-  @Input({ required: true }) name!: string;
-  @Input({ required: true }) id!: string
+  // @Input({ required: true }) avatar!: string;
+  // @Input({ required: true }) name!: string;
+  // @Input({ required: true }) id!: string
+
+  //accepting objects as input
+  @Input({ required: true }) user!: User
   @Output() select = new EventEmitter<string>(); //will allow us to emit custom values to any parent component i.e app component
 
   // select = output<string>() //using output function instead of decorator
   public get imagePath(): string {
-    return 'assets/users/' + this.avatar
+    return 'assets/users/' + this.user.avatar
   }
 
 
@@ -57,7 +73,7 @@ export class UserComponent {
 
 
     //--------------------------------- emitting the vlaue to the parent components
-    this.select.emit(this.id)
+    this.select.emit(this.user.id)
   }
 
 
