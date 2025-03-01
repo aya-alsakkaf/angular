@@ -2,9 +2,10 @@ import { Component, Input } from '@angular/core';
 import { TaskComponent } from "./task/task.component";
 // import { tasks } from '../../../data/tasks';
 import { DUMMY_USERS } from '../../../data/users';
+import { NewTaskComponent } from './new-task/new-task.component';
 @Component({
   selector: 'app-tasks',
-  imports: [TaskComponent],
+  imports: [TaskComponent, NewTaskComponent],
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.css'
 })
@@ -12,6 +13,7 @@ export class TasksComponent {
   @Input({ required: true }) username?: string //? tells angular this might not be set to a value
   // @Input() username: string | undefined // create a union to handle undefined values
   @Input({ required: true }) id?: string
+  addNewTask: boolean = false;
   tasks = [{
     id: 't1',
     userId: 'u1',
@@ -42,5 +44,17 @@ export class TasksComponent {
 
   onCompleteTasks(id: string) {
     this.tasks = this.tasks.filter((task) => task.id != id)
+  }
+
+  onAddNewTask() {
+    this.addNewTask = true
+  }
+
+  onHandleInput(newTask: string) {
+    console.log(newTask)
+  }
+
+  onCancelAddTask() {
+    this.addNewTask = false
   }
 }
