@@ -2,22 +2,19 @@
 
 <main>
   <ul id="users">
-    <!-- @for (user of users; track user.id){ -->
+    @for (user of users; track user.id){
     <!-- ngFor and ngIf are structual directives -->
-    <li *ngFor="let user of users">
+    <li>
       <app-user [user]="user" (select)="onSelectUser($event)" />
     </li>
-    <!-- } -->
+    }
   </ul>
 
-  <!-- @if (selectedUser) { -->
-  <app-tasks
-    *ngIf="selectedUser; else fallback"
-    [username]="selectedUser!.name"
-  />
-  <!-- }@else { -->
-  <ng-template #fallback>
-    <p id="fallback">Select a user to see their tasks!</p>
-  </ng-template>
-  <!-- } -->
+  @if (selectedUser) {
+  <app-tasks [username]="selectedUser!.name" [id]="selectedUser!.id" />
+  }@else {
+  <!-- <ng-template #fallback> -->
+  <p id="fallback">Select a user to see their tasks!</p>
+  <!-- </ng-template> -->
+  }
 </main>
