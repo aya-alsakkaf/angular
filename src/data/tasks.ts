@@ -1,4 +1,4 @@
-export const tasks = [{
+export let tasks = [{
     id: 't1',
     userId: 'u1',
     title: 'Master Angular',
