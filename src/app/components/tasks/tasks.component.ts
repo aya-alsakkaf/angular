@@ -3,6 +3,7 @@ import { TaskComponent } from "./task/task.component";
 // import { tasks } from '../../../data/tasks';
 import { DUMMY_USERS } from '../../../data/users';
 import { NewTaskComponent } from './new-task/new-task.component';
+import { NewTask } from './task/task.model';
 @Component({
   selector: 'app-tasks',
   imports: [TaskComponent, NewTaskComponent],
@@ -10,9 +11,9 @@ import { NewTaskComponent } from './new-task/new-task.component';
   styleUrl: './tasks.component.css'
 })
 export class TasksComponent {
-  @Input({ required: true }) username?: string //? tells angular this might not be set to a value
+  @Input({ required: true }) username!: string //? tells angular this might not be set to a value
   // @Input() username: string | undefined // create a union to handle undefined values
-  @Input({ required: true }) id?: string
+  @Input({ required: true }) id!: string
   addNewTask: boolean = false;
   tasks = [{
     id: 't1',
@@ -55,6 +56,18 @@ export class TasksComponent {
   }
 
   onCancelAddTask() {
+    this.addNewTask = false
+  }
+  onAddTask(taskData: NewTask) {
+
+    this.tasks.push({
+      id: new Date().getTime().toString(),
+      userId: this.id,
+      title: taskData.title,
+      summary: taskData.summary,
+      dueDate: taskData.date
+    })
+
     this.addNewTask = false
   }
 }
