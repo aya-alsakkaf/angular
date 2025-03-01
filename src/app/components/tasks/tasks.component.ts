@@ -4,6 +4,9 @@ import { TaskComponent } from "./task/task.component";
 import { DUMMY_USERS } from '../../../data/users';
 import { NewTaskComponent } from './new-task/new-task.component';
 import { NewTask } from './task/task.model';
+import { TasksService } from './tasks.service';
+import { tasks } from '../../../data/tasks';
+
 @Component({
   selector: 'app-tasks',
   imports: [TaskComponent, NewTaskComponent],
@@ -15,36 +18,27 @@ export class TasksComponent {
   // @Input() username: string | undefined // create a union to handle undefined values
   @Input({ required: true }) id!: string
   addNewTask: boolean = false;
-  tasks = [{
-    id: 't1',
-    userId: 'u1',
-    title: 'Master Angular',
-    summary:
-      'Learn all the basic and advanced features of Angular & how to apply them.',
-    dueDate: '2025-12-31',
-  },
-  {
-    id: 't2',
-    userId: 'u3',
-    title: 'Build first prototype',
-    summary: 'Build a first prototype of the online shop website',
-    dueDate: '2024-05-31',
-  },
-  {
-    id: 't3',
-    userId: 'u3',
-    title: 'Prepare issue template',
-    summary:
-      'Prepare and describe an issue template which will help with project management',
-    dueDate: '2024-06-15',
-  },]
+  private tasksService = new TasksService()
+
+  /**
+   * private tasksService = new TasksService() 
+
+   * the problem with creating an instance, the data wouldn't be consisted across the app
+   * since we have to use different instances in different parts of the application
+   * Therefor, we result in dependency injection
+   */
+
+  constructor(tasksService: TasksService) { //like donet mvc
+    this.tasksService = tasksService
+  } //dependency injection: you tell angular which type of value you need and angular creates it and provides it as an argument
+
   get userTasks() {
 
-    return this.tasks.filter((task) => task.userId == this.id)
+    return this.tasksService.getUserTasks(this.id)
   }
 
   onCompleteTasks(id: string) {
-    this.tasks = this.tasks.filter((task) => task.id != id)
+    this.tasksService.removeTask(id)
   }
 
   onAddNewTask() {
@@ -55,19 +49,8 @@ export class TasksComponent {
     console.log(newTask)
   }
 
-  onCancelAddTask() {
+  onCloseAddTask() {
     this.addNewTask = false
   }
-  onAddTask(taskData: NewTask) {
 
-    this.tasks.push({
-      id: new Date().getTime().toString(),
-      userId: this.id,
-      title: taskData.title,
-      summary: taskData.summary,
-      dueDate: taskData.date
-    })
-
-    this.addNewTask = false
-  }
 }
