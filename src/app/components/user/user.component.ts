@@ -43,7 +43,7 @@ export class UserComponent {
   //accepting objects as input
   @Input({ required: true }) user!: User
   @Output() select = new EventEmitter<string>(); //will allow us to emit custom values to any parent component i.e app component
-
+  @Input({ required: true }) selected!: boolean;
   // select = output<string>() //using output function instead of decorator
   public get imagePath(): string {
     return 'assets/users/' + this.user.avatar

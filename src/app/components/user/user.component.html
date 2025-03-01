@@ -1,6 +1,7 @@
 <div>
   <!-- event listner to the button -->
-  <button (click)="onSelectUser()">
+  <!-- CSS Binding to configure dynamic css styles -->
+  <button [class.active]="selected" (click)="onSelectUser()">
     <!-- would not use string interpolation to pass data to properties in tags 
      but we should data binding instead.  -->
     <!-- <img src="assets/users/{{ selectedUser.avatar }}" />  -->
