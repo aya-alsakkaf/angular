@@ -9,8 +9,8 @@ import { NgFor, NgIf } from '@angular/common';
 
 @Component({ //decorator, ts feature , which adds meta data to the component
   selector: 'app-root', //the tag that the component will render in it's place
-  imports: [HeaderComponent, UserComponent, TasksComponent, NgFor, NgIf],
-  standalone: true,
+  standalone: false,
+  // imports: [HeaderComponent, UserComponent, TasksComponent, NgFor, NgIf],
   templateUrl: './app.component.html', //contains the markup or look 
   styleUrl: './app.component.css', //styling for this component. 
 })

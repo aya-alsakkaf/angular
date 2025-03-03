@@ -11,11 +11,10 @@ import { CardComponent } from "../../shared/card/card.component";
 //   avatar: string
 // }
 
-
-
 @Component({
   selector: 'app-user',
-  imports: [CardComponent],
+  standalone: false,
+  // imports: [CardComponent],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'
 })
