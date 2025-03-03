@@ -18,6 +18,7 @@ export class AppComponent {
   title = 'first-angular-app';
   users = DUMMY_USERS
 
+
   selectedUserId?: string;
 
   get selectedUser() {
